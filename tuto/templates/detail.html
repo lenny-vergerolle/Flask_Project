@@ -8,6 +8,9 @@
 
 
     <div class="sample">
-    <img src="{{ url_for('static', filename='images/'+book.img) }}" alt="{{book.title}}" title="{{x.title}}">
+        <img src="{{ url_for('static', filename='images/'+book.img) }}" alt="{{book.title}}" title="{{book.title}}">
+        <p> {{book.title}} est à {{book.price}} euros ! </p>
+        
+
     </div>
 {% endblock %}

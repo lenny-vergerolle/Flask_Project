@@ -12,13 +12,13 @@ for book in books:
 
 
 def get_sample():
-    return books[0:30]
+    return books[0:20]
 
 
 class Author(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
-
+    
 
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -27,5 +27,4 @@ class Book(db.Model):
     url = db.Column(db.String(200))
     img = db.Column(db.String(200))
     author_id = db.Column(db.Integer, db.ForeignKey("author.id"))
-    author = db.relationship("Author",
-                             backref=db.backref("books", lazy=" dynamic"))
+    author = db.relationship("Author", backref=db.backref("books", lazy="dynamic"))

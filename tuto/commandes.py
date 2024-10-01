@@ -11,7 +11,7 @@ def loaddb(filename):
     db.create_all()
 
     # chargement de notre jeu de donnée
-    books = yaml.load(open(filename))
+    books = yaml.safe_load(open(filename))
 
     # import des modèles
     from .models import Author, Book
@@ -19,12 +19,12 @@ def loaddb(filename):
 
     authors = {}
     for b in books:
-        a = b[" author"]
+        a = b["author"]
         if a not in authors:
             o = Author(name=a)
             db.session.add(o)
             authors[a] = o
-            db.session.commit()
+    db.session.commit()
         # deuxième passe: création de tous les livres
     for b in books:
         a = authors[b["author"]]
@@ -34,4 +34,4 @@ def loaddb(filename):
                  img=b["img"],
                  author_id=a.id)
         db.session.add(o)
-        db.session.commit()
+    db.session.commit()
